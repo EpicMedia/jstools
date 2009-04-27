@@ -24,16 +24,15 @@ function relative_time(time_value) {
 }
 
 function twitterCallback2(obj) {
-	var twitters = obj;
-	var statusHTML = "";
-	var username = "";
-	for (var i=0; i<twitters.length; i++){
-		username = twitters[i].user.screen_name;
-		if (	twitters[i].text.search(new RegExp("Meanderings")) == -1
-			&&	twitters[i].text.search(new RegExp("tinyurl\.com")) == -1 ) {
-			statusHTML += ('<li><span>'+twitters[i].text+'</span> <a style="font-size:85%" href="http://twitter.com/'+username+'/statuses/'+twitters[i].id+'">'+relative_time(twitters[i].created_at)+'</a></li>');
-			break;
-		}
-	}
+	var twitter 		= obj[0];
+	var statusHTML	=	'<li>'
+									+	'<span>'
+									+	twitter.text.replace(/(http:\S+)/gi, "<a href='$1'>$1</a>").replace(/@(\S+)/gi, "<a href='http://twitter.com/$1'>@$1</a>")
+									+	'</span> <a style="font-size:85%" href="http://twitter.com/'
+									+	twitter.user.screen_name
+									+	'/statuses/'
+									+	twitter.id+'">'+relative_time(twitter.created_at)+'</a></li>'
+									;
+
 	document.getElementById('twitter_update_list').innerHTML = statusHTML;
 }
