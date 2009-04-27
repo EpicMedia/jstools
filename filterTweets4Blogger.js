@@ -27,7 +27,7 @@ function twitterCallback2(obj) {
 	var twitter 		= obj[0];
 	var statusHTML	=	'<li>'
 									+	'<span>'
-									+	twitter.text.replace(/(http:\S+)/gi, "<a href='$1'>$1</a>").replace(/@(\S+)/gi, "<a href='http://twitter.com/$1'>@$1</a>")
+									+	twitter.text.replace(/(http:\S+)/gi, "<a href='$1'>$1</a>").replace(/@([A-Za-z0-9_]+)/gi, "<a href='http://twitter.com/$1'>@$1</a>").replace(/#([A-Za-z0-9_]+)/gi, "<a href='http://search.twitter.com/search?q=%23$1'>#$1</a>")
 									+	'</span> <a style="font-size:85%" href="http://twitter.com/'
 									+	twitter.user.screen_name
 									+	'/statuses/'
